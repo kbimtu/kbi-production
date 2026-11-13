@@ -227,8 +227,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .kbi-header.compact nav.kbi-main a { padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--rule); }
   .kbi-header.compact nav.kbi-main a:last-child { border-bottom: 0; }
 @media (max-width: 380px) { .kbi-header__wordmark { font-size: 13px; } .kbi-header__brand img { width: 34px; height: 34px; } }
-.draft-note { background: var(--ground-deep); border-bottom: 1px solid var(--rule); font: 500 12px/1.4 var(--font-mono); color: var(--line-muted); }
-.draft-note .wrap { padding-block: 6px; }
 
 /* ── Hero: full-screen 3D Königsberg (shared scene with /about/inspiration) ── */
 .h3d { position: relative; }
@@ -473,7 +471,6 @@ h1, h2, h3, .phero__lead, .stitle p, .h3card p { overflow-wrap: break-word; }
     <nav class="kbi-lang" aria-label="Sprache"><a href="../index.html" hreflang="en" lang="en">EN</a><a href="index.html" hreflang="de" lang="de" aria-current="true">DE</a></nav>
   </div>
 </header>
-<div class="draft-note" id="deNote" hidden><div class="wrap">Deutsche Fassung: Entwurf, noch nicht offiziell freigegeben.</div></div>
 
 <main>
 <section class="h3d" aria-label="Warum wir Königsberger Brückeninstitut heißen">
@@ -1180,12 +1177,11 @@ function KBISkyline(cv) {
   window.addEventListener('resize', function () { hdr(); queue(); });
   new ResizeObserver(function () { sky.draw(); }).observe(document.getElementById('skyline'));
 
-  var note = document.getElementById('deNote');
   function setLang(l) {
     LANG = l; document.documentElement.lang = l;
     document.querySelectorAll('.kbi-lang button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.lang === l)); });
     document.querySelectorAll('[data-' + l + ']').forEach(function (el) { el.textContent = el.getAttribute('data-' + l); });
-    note.hidden = l !== 'de'; renderEmblems(); hdr();
+    renderEmblems(); hdr();
     document.querySelectorAll('[data-' + l + '-label]').forEach(function (el) { el.setAttribute('aria-label', el.getAttribute('data-' + l + '-label')); });
     try { localStorage.setItem('kbi-lang', l); } catch (e) {}
   }

@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Layout safety: long words and labels never push a page wider than the screen */
 h1, h2, h3, .phero__lead, .stitle p, .h3card p { overflow-wrap: break-word; }
 :lang(de) h1, :lang(de) h2, :lang(de) h3, :lang(de) .phero__lead, :lang(de) .stitle p, :lang(de) .h3card p { hyphens: auto; }
@@ -244,8 +243,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .kbi-header.compact nav.kbi-main a { padding: 14px 0; font-size: 14px; border-bottom: 1px solid var(--rule); }
   .kbi-header.compact nav.kbi-main a:last-child { border-bottom: 0; }
 @media (max-width: 380px) { .kbi-header__wordmark { font-size: 13px; } .kbi-header__brand img { width: 34px; height: 34px; } }
-.draft-note { background: var(--ground-deep); border-bottom: 1px solid var(--rule); font: 500 12px/1.4 var(--font-mono); color: var(--line-muted); }
-.draft-note .wrap { padding-block: 6px; }
 
 /* ── Hero: full-screen 3D Königsberg (shared scene with /about/inspiration) ── */
 .h3d { position: relative; }
@@ -469,7 +466,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     <nav class="kbi-lang" aria-label="Language"><a href="index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="de/index.html" hreflang="de" lang="de">DE</a></nav>
   </div>
 </header>
-<div class="draft-note" id="deNote" hidden><div class="wrap">Deutsche Fassung: Entwurf, noch nicht offiziell freigegeben.</div></div>
 
 <main>
 <section class="h3d" aria-label="Why we are called the Königsberger Bridges Institute">
@@ -1176,12 +1172,11 @@ function KBISkyline(cv) {
   window.addEventListener('resize', function () { hdr(); queue(); });
   new ResizeObserver(function () { sky.draw(); }).observe(document.getElementById('skyline'));
 
-  var note = document.getElementById('deNote');
   function setLang(l) {
     LANG = l; document.documentElement.lang = l;
     document.querySelectorAll('.kbi-lang button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.lang === l)); });
     document.querySelectorAll('[data-' + l + ']').forEach(function (el) { el.textContent = el.getAttribute('data-' + l); });
-    note.hidden = l !== 'de'; renderEmblems(); hdr();
+    renderEmblems(); hdr();
     document.querySelectorAll('[data-' + l + '-label]').forEach(function (el) { el.setAttribute('aria-label', el.getAttribute('data-' + l + '-label')); });
     try { localStorage.setItem('kbi-lang', l); } catch (e) {}
   }
@@ -1730,5 +1725,4 @@ resize(); requestAnimationFrame(frame);
   small.addEventListener('change', function () { set(false); fit(); });
 })();
 </script>
-</body></html>
 </body></html>

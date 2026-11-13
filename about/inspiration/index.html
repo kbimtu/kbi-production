@@ -181,7 +181,6 @@ a { color: var(--cyan); text-underline-offset: 3px; }
 .lang { display: inline-flex; border: 1px solid var(--rule-strong); }
 .lang button { background: transparent; color: var(--line); border: 0; padding: 7px 10px; font: 500 12px/1 var(--font-mono); letter-spacing: .1em; cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--cyan); color: var(--on-gold); }
-.draft { background: var(--ground-deep); border-bottom: 1px solid var(--rule); font: 500 12px/1.4 var(--font-mono); color: var(--line-muted); padding: 6px max(16px, env(safe-area-inset-left, 0px)); }
 @media (max-width: 640px) { .hd__back { display: none; } .brand span { font-size: 13px; } }
 
 /* Story: sticky stage + scrolling steps */
@@ -350,7 +349,6 @@ h1, h2, h3, .phero__lead, .stitle p, .h3card p { overflow-wrap: break-word; }
     <nav class="kbi-lang" aria-label="Language"><a href="index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../de/ueber-uns/inspiration/index.html" hreflang="de" lang="de">DE</a></nav>
   </div>
 </header>
-<div class="draft" id="deNote" hidden>Deutsche Fassung: Entwurf, noch nicht offiziell freigegeben.</div>
 
 <main class="story" id="story">
   <div class="stage" id="stage">
@@ -1067,12 +1065,11 @@ new ResizeObserver(resize).observe(stage);
 hdr(); resize(); requestAnimationFrame(frame);
 
 /* ── Language ── */
-var note = document.getElementById('deNote');
 function setLang(l) {
   document.documentElement.lang = l;
   document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
   document.querySelectorAll('[data-' + l + ']').forEach(function (el) { el.textContent = el.getAttribute('data-' + l); });
-  note.hidden = l !== 'de'; hdr();
+  hdr();
   try { localStorage.setItem('kbi-lang', l); } catch (e) {}
 }
 document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
